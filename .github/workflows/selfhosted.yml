@@ -23,13 +23,14 @@ jobs:
           if (Test-Path -Path $exePath -PathType Leaf) {
             Write-Host "dotCover.exe exists at the specified location."
           } else {
-            Write-Host "dotCover.exe does not exist at the specified location."
+            Write-Host "dotCover.exe does not exist at the specified location, downloading it."
             $url = "https://download.jetbrains.com/resharper/dotUltimate.2023.2.2/JetBrains.dotCover.CommandLineTools.windows-x64.2023.2.2.zip"
             $outputPath = "..\dotCover.zip"
             $extractPath = "..\dotCover"
             
-            Invoke-WebRequest -Uri $url -OutFile $outputPath
-            Expand-Archive -Path $outputPath -DestinationPath $extractPath
+            Invoke-WebRequest -Uri $url -OutFile $outputPath -Progress ([System.Management.Automation.PSProgressSource]::New())
+            Expand-Archive -Path $outputPath -DestinationPath $extractPath -Force -Verbose
+            Remove-Item -Path $outputPath -Force
           }
 
       - name: Check out code
