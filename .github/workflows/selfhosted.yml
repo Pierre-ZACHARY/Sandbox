@@ -174,15 +174,14 @@ jobs:
     steps:
       - name: commit
         run: |
+          $commitMessage = "$(git branch --show-current)/$(git rev-parse HEAD)"
           # go on branch CI
           git checkout CI
-          $path = "../CiOutput"
-          # copy everything from ../CiOutput to ./CiOutput
-          mv $path ./CiOutput
+          mv ../CiOutput/* ./CiOutput
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          git add .
-          git commit -m "Update analysis results"
+          git add ./CiOutput
+          git commit -m "Update CI output from $commitMessage"
           git push
 
   cleanup:
