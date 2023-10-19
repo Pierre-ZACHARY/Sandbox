@@ -1,0 +1,61 @@
+name: Self-hosted Runner Workflow
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - closed
+
+jobs:
+  setup:
+    runs-on: self-hosted
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Check if Unity is in PATH Linux
+        if: runner.os != 'Windows'
+        run: |
+          UNITY_PATH=$(which unity)
+          if [ -n "$UNITY_PATH" ]; then
+            echo "Unity is installed and is located at: $UNITY_PATH"
+          else
+            echo "Unity is not installed or not in the PATH."
+            exit 1  # This line will stop the workflow with a failure status.
+          fi
+      - name: Check if Unity is in PATH Windows
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $UNITY_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'unity.exe' | Select-Object -ExpandProperty Source
+          if ($UNITY_PATH) {
+            Write-Host "Unity is installed and is located at: $UNITY_PATH"
+          } else {
+            Write-Host "Unity is not installed or not in the PATH."
+            exit 1  # This line will stop the workflow with a failure status.
+          }
+      - name: Generate Project
+        run: unity -batchmode -projectPath . -logfile -
+
+  tests:
+    runs-on: self-hosted
+    needs: setup
+    steps:
+      - name: list
+        run: dir
+
+  cleanup:
+    runs-on: self-hosted
+    needs: tests
+    steps:
+      - name: cleanup Windows
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: Remove-Item * -Force -Recurse
+      - name: cleanup Linux
+        if: runner.os != 'Windows'
+        run: rm -r -- !(.) .*
