@@ -15,8 +15,23 @@ jobs:
   setup:
     runs-on: self-hosted
     steps:
-      - name: Check dotCover
-        run: echo test > ../test.txt
+      - name: Check dotCover Windows
+        if: runner.os == 'Windows'
+        run: |
+          $exePath = "..\dotCover\dotCover.exe"
+  
+          if (Test-Path -Path $exePath -PathType Leaf) {
+            Write-Host "dotCover.exe exists at the specified location."
+          } else {
+            Write-Host "dotCover.exe does not exist at the specified location."
+            $url = "https://download.jetbrains.com/resharper/dotUltimate.2023.2.2/JetBrains.dotCover.CommandLineTools.windows-x64.2023.2.2.zip"
+            $outputPath = "..\dotCover.zip"
+            $extractPath = "..\dotCover"
+            
+            Invoke-WebRequest -Uri $url -OutFile $outputPath
+            Expand-Archive -Path $outputPath -DestinationPath $extractPath
+          }
+
       - name: Check out code
         uses: actions/checkout@v2
       - name: Check if Unity is in PATH Linux
