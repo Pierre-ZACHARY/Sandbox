@@ -28,6 +28,7 @@ jobs:
           } else {
             Write-Host "dotCover.exe does not exist at the specified location, downloading it."
             $url = "https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.windows-x64.$DOTCOVER_VERSION.zip"
+            echo "Downloading dotCover from $url"
             $outputPath = "..\dotCover.zip"
             $extractPath = "..\dotCover"
             
@@ -38,6 +39,13 @@ jobs:
       - name: Check dotCover Linux and macOS
         if: runner.os != 'Windows'
         run: |
+          if [ ! -e "../dotCover/dotCover.sh" ]; then
+            echo "dotCover.sh does not exist at the specified location, downloading it."
+          else
+            echo "dotCover.sh exists at the specified location."
+            exit 0
+          fi
+          
           if [[ $(uname -m) != "x86_64" ]]; then
             if [[ $RUNNER_OS == "Linux" ]]; then
               download_url="https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.linux-arm64.$DOTCOVER_VERSION.tar.gz"
@@ -51,7 +59,7 @@ jobs:
               download_url="https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.macos-x64.$DOTCOVER_VERSION.tar.gz"
             fi
           fi
-          
+          echo "Downloading dotCover from $download_url"
           # Define the download and output paths
           output_path="../dotCover.tar.gz"
           extract_path="../dotCover"
