@@ -28,7 +28,7 @@ jobs:
             Write-Host "dotCover.exe exists at the specified location."
           } else {
             Write-Host "dotCover.exe does not exist at the specified location, downloading it."
-            $url = "https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.windows-x64.$DOTCOVER_VERSION.zip"
+            $url = "https://download.jetbrains.com/resharper/dotUltimate.$env:DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.windows-x64.$env:DOTCOVER_VERSION.zip"
             echo "Downloading dotCover from $url"
             $outputPath = "..\dotCover.zip"
             $extractPath = "..\dotCover"
