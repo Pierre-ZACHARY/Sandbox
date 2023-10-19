@@ -21,6 +21,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: powershell
         run: |
+          echo "$DOTCOVER_VERSION"
           $exePath = "..\dotCover\dotCover.exe"
   
           if (Test-Path -Path $exePath -PathType Leaf) {
