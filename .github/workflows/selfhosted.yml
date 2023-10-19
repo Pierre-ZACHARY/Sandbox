@@ -136,6 +136,7 @@ jobs:
     steps:
       - name: check roslynator is installed Windows
         if: runner.os == 'Windows'
+        shell: powershell
         run: |
           $ROSLYNATOR_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'roslynator.exe' | Select-Object -ExpandProperty Source
           if($ROSLYNATOR_PATH) {
