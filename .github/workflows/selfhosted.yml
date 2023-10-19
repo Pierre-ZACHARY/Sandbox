@@ -15,7 +15,7 @@ jobs:
   setup:
     runs-on: self-hosted
     env:
-      DOTCOVER_VERSION: "2023.2.2"
+      DOTCOVER_VERSION: 2023.2.2
     steps:
       - name: Check dotCover Windows
         if: runner.os == 'Windows'
