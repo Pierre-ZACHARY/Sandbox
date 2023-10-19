@@ -14,9 +14,12 @@ on:
 jobs:
   setup:
     runs-on: self-hosted
+    env:
+      DOTCOVER_VERSION: "2023.2.2"
     steps:
       - name: Check dotCover Windows
         if: runner.os == 'Windows'
+        shell: powershell
         run: |
           $exePath = "..\dotCover\dotCover.exe"
   
@@ -24,14 +27,38 @@ jobs:
             Write-Host "dotCover.exe exists at the specified location."
           } else {
             Write-Host "dotCover.exe does not exist at the specified location, downloading it."
-            $url = "https://download.jetbrains.com/resharper/dotUltimate.2023.2.2/JetBrains.dotCover.CommandLineTools.windows-x64.2023.2.2.zip"
+            $url = "https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.windows-x64.$DOTCOVER_VERSION.zip"
             $outputPath = "..\dotCover.zip"
             $extractPath = "..\dotCover"
             
-            Invoke-WebRequest -Uri $url -OutFile $outputPath -Progress ([System.Management.Automation.PSProgressSource]::New())
+            Invoke-WebRequest -Uri $url -OutFile $outputPath -Verbose
             Expand-Archive -Path $outputPath -DestinationPath $extractPath -Force -Verbose
-            Remove-Item -Path $outputPath -Force
+            Remove-Item -Path $outputPath -Force -Verbose
           }
+      - name: Check dotCover Linux and macOS
+        if: runner.os != 'Windows'
+        run: |
+          if [[ $(uname -m) != "x86_64" ]]; then
+            if [[ $RUNNER_OS == "Linux" ]]; then
+              download_url="https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.linux-arm64.$DOTCOVER_VERSION.tar.gz"
+            else
+              download_url="https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.macos-arm64.$DOTCOVER_VERSION.tar.gz"
+            fi
+          else
+            if [[ $RUNNER_OS == "Linux" ]]; then
+              download_url="https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.linux-x64.$DOTCOVER_VERSION.tar.gz"
+            else
+              download_url="https://download.jetbrains.com/resharper/dotUltimate.$DOTCOVER_VERSION/JetBrains.dotCover.CommandLineTools.macos-x64.$DOTCOVER_VERSION.tar.gz"
+            fi
+          fi
+          
+          # Define the download and output paths
+          output_path="../dotCover.tar.gz"
+          extract_path="../dotCover"
+          wget -O "$output_path" "$download_url"
+          mkdir -p "$extract_path"
+          tar -xzvf "$output_path" -C "$extract_path"
+          rm "$output_path"
 
       - name: Check out code
         uses: actions/checkout@v2
