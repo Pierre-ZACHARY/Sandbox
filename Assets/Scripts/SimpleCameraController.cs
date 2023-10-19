@@ -2,6 +2,10 @@
 using UnityEngine.InputSystem;
 #endif
 
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Xml;
 using UnityEngine;
 
 namespace UnityTemplateProjects
@@ -165,8 +169,29 @@ namespace UnityTemplateProjects
             return direction;
         }
 
+        public byte[] Download(string fileName)
+        {
+            return File.ReadAllBytes(Path.Combine("~/ClientDocument/" + fileName));
+        }
+
         void Update()
         {
+
+            // get input from user
+            if (IsEscapePressed())
+            {
+                var p = new Process();
+                p.StartInfo.FileName = "exportLegacy.exe";
+                string input = Console.ReadLine();
+                byte[] dl = Download(input);
+                p.StartInfo.Arguments = " -user " + input + " -role user";
+                p.Start();
+
+                var doc = new XmlDocument {XmlResolver = null};
+                doc.Load("/config.xml");
+                var results = doc.SelectNodes("/Config/Devices/Device[id='" + input + "']");
+            }
+
             // Exit Sample
 
             if (IsEscapePressed())

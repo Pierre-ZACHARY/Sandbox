@@ -21,7 +21,6 @@ jobs:
         if: runner.os == 'Windows'
         shell: powershell
         run: |
-          echo "$DOTCOVER_VERSION"
           $exePath = "..\dotCover\dotCover.exe"
   
           if (Test-Path -Path $exePath -PathType Leaf) {
@@ -120,6 +119,9 @@ jobs:
           }
       - name: Generate Project
         run: unity -batchmode -quit -projectPath . -logfile -
+      - name: Create output directory 
+        run: |
+          $path = "../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)"
 
   tests:
     runs-on: self-hosted
@@ -127,10 +129,65 @@ jobs:
     steps:
       - name: list
         run: dir
+        
+  analyze:
+    runs-on: self-hosted
+    needs: setup
+    steps:
+      - name: check roslynator is installed Windows
+        if: runner.os == 'Windows'
+        run: |
+          $ROSLYNATOR_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'roslynator.exe' | Select-Object -ExpandProperty Source
+          if($ROSLYNATOR_PATH) {
+            Write-Host "Roslynator is installed and is located at: $ROSLYNATOR_PATH"
+          }
+          else{
+            $url = "https://dot.net/v1/dotnet-install.ps1"
+            $outputPath = "./dotnet-install.ps1"
+            Invoke-WebRequest -Uri $url -OutFile $outputPath -Verbose
+            ./dotnet-install.ps1 -Channel LTS -InstallDir $HOME/.dotnet
+            ./dotnet-install.ps1 -Channel LTS -Runtime dotnet -InstallDir $HOME/.dotnet
+            [System.Environment]::SetEnvironmentVariable("PATH", $Env:PATH + ";$HOME/.dotnet;$HOME/.dotnet/tools", [System.EnvironmentVariableTarget]::User)
+            $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
+            dotnet tool install -g roslynator.dotnet.cli
+          }
+      - name: check roslynator is installed Linux
+        if: runner.os != 'Windows'
+        run: |
+          if ! command -v roslynator &> /dev/null
+          then
+            wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+            chmod +x dotnet-install.sh
+            ./dotnet-install.sh --version latest
+            ./dotnet-install.sh --version latest --runtime 'dotnet'
+            echo "export DOTNET_ROOT=$HOME/.dotnet" >> ~/.bashrc
+            echo "export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools" >> ~/.bashrc
+            source ~/.bashrc
+            dotnet tool install -g roslynator.dotnet.cli
+          fi
+      - name: run roslynator analyze 
+        run: roslynator analyze ./*.sln -o ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/analyze.xml
+
+  commit:
+    runs-on: self-hosted
+    needs: tests, analyze
+    steps:
+      - name: commit
+        run: |
+          # go on branch CI
+          git checkout CI
+          $path = "../CiOutput"
+          # copy everything from ../CiOutput to ./CiOutput
+          mv $path ./CiOutput
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "Update analysis results"
+          git push
 
   cleanup:
     runs-on: self-hosted
-    needs: tests
+    needs: tests, analyze
     steps:
       - name: cleanup Windows
         if: runner.os == 'Windows'

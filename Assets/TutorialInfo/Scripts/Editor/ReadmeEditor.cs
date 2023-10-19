@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Xml;
+using Debug = UnityEngine.Debug;
 
 [CustomEditor(typeof(Readme))]
 [InitializeOnLoad]
@@ -36,6 +39,8 @@ public class ReadmeEditor : Editor
 
     static void LoadLayout()
     {
+
+
         var assembly = typeof(EditorApplication).Assembly;
         var windowLayoutType = assembly.GetType("UnityEditor.WindowLayout", true);
         var method = windowLayoutType.GetMethod("LoadWindowLayout", BindingFlags.Public | BindingFlags.Static);
