@@ -21,11 +21,26 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           UNITY_PATH=$(which unity)
+  
           if [ -n "$UNITY_PATH" ]; then
             echo "Unity is installed and is located at: $UNITY_PATH"
+          
+            # Extract the Unity version from the executable path
+            UNITY_VERSION=$(echo "$UNITY_PATH" | grep -oP '(\d{4}\.\d+\.\d+[a-z]+\d+)')
+            
+            # Read the Unity version from ProjectVersion.txt
+            PROJECT_VERSION_FILE="./ProjectSettings/ProjectVersion.txt"
+            PROJECT_VERSION=$(grep -oP 'm_EditorVersion: \K(\d{4}\.\d+\.\d+[a-z]+\d+)' "$PROJECT_VERSION_FILE")
+            
+            if [ "$PROJECT_VERSION" = "$UNITY_VERSION" ]; then
+              echo "Unity versions match: ProjectVersion.txt version is $PROJECT_VERSION and Unity path version is $UNITY_VERSION."
+            else
+              echo "Unity versions do not match: ProjectVersion.txt version is $PROJECT_VERSION, but Unity path version is $UNITY_VERSION."
+              exit 1
+            fi
           else
             echo "Unity is not installed or not in the PATH."
-            exit 1  # This line will stop the workflow with a failure status.
+            exit 1  # This line will stop the script with a failure status.
           fi
       - name: Check if Unity is in PATH Windows
         if: runner.os == 'Windows'
@@ -34,12 +49,23 @@ jobs:
           $UNITY_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'unity.exe' | Select-Object -ExpandProperty Source
           if ($UNITY_PATH) {
             Write-Host "Unity is installed and is located at: $UNITY_PATH"
+            # Compare the two versions
+            $projectVersionFile = ".\ProjectSettings\ProjectVersion.txt"
+            $projectVersion = Get-Content $projectVersionFile | Where-Object { $_ -match "m_EditorVersion:" } | ForEach-Object { $_ -replace "m_EditorVersion: ", "" }
+            $pattern = "(\d{4}\.\d+\.\d+[a-z]+\d+)"
+            $unityVersion = [regex]::Match($UNITY_PATH, $pattern).Groups[1].Value
+            if ($projectVersion -eq $unityVersion) {
+              Write-Host "Unity versions match: ProjectVersion.txt version is $projectVersion and Unity path version is $unityVersion."
+            } else {
+              Write-Host "Unity versions do not match: ProjectVersion.txt version is $projectVersion, but Unity path version is $unityVersion."
+              exit 1
+            }
           } else {
             Write-Host "Unity is not installed or not in the PATH."
             exit 1  # This line will stop the workflow with a failure status.
           }
       - name: Generate Project
-        run: unity -batchmode -projectPath . -logfile -
+        run: unity -batchmode -quit -projectPath . -logfile -
 
   tests:
     runs-on: self-hosted
