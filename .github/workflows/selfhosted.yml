@@ -186,7 +186,7 @@ jobs:
 
   cleanup:
     runs-on: self-hosted
-    needs: [tests, analyze]
+    needs: commit
     steps:
       - name: cleanup Windows
         if: runner.os == 'Windows'
