@@ -15,7 +15,9 @@ You need to have in your path :
 
 ## Analyzers for roslynator
 
-You need to install them yourself using nugget ( and put them below /Packages, which should be the default )
+These analyzers will respectively add some check to your code
+
+You may want to install them yourself using nugget ( and put them below /Packages, which should be the default )
 - Microsoft.Unity.Analyzers.1.17.0
 - StyleCop.Analyzers.1.1.118
 - SecurityCodeScan.VS2019.5.6.7
