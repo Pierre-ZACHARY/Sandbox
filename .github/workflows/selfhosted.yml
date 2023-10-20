@@ -165,8 +165,40 @@ jobs:
             source ~/.bashrc
             dotnet tool install -g roslynator.dotnet.cli
           fi
-      - name: run roslynator analyze 
-        run: roslynator analyze ./*.sln -o ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/analyze.xml
+      - name: run roslynator analyze Windows
+        if: runner.os == 'Windows'
+        run: |
+          $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
+          if ($slnFile -eq $null) {
+              Write-Host "No .sln file found in the directory and its subdirectories."
+          } else {
+            # Run roslynator analyze on the found .sln file
+            $slnPath = $slnFile.FullName
+            $outputPath = "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml"
+          
+            Write-Host "Found .sln file: $slnPath"
+            Write-Host "Running roslynator analyze on $slnPath"
+            
+            roslynator analyze $slnPath -o $outputPath
+          }
+      - name: run roslynator analyze Linux
+        if: runner.os != 'Windows'
+        run: |
+          slnFile=$(find . -type f -name "*.sln" | head -n 1)
+  
+          if [ -z "$slnFile" ]; then
+            echo "No .sln file found in the directory and its subdirectories."
+          else
+            # Run roslynator analyze on the found .sln file
+            outputDir="../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)"
+            outputPath="$outputDir/analyze.xml"
+          
+            echo "Found .sln file: $slnFile"
+            echo "Running roslynator analyze on $slnFile"
+            
+            mkdir -p "$outputDir"
+            roslynator analyze "$slnFile" -o "$outputPath"
+          fi
 
   commit:
     runs-on: self-hosted
