@@ -173,13 +173,11 @@ jobs:
               Write-Host "No .sln file found in the directory and its subdirectories."
           } else {
             # Run roslynator analyze on the found .sln file
-            $slnPath = $slnFile.FullName
-            $outputPath = "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml"
-          
+            $slnPath = $slnFile.FullName          
             Write-Host "Found .sln file: $slnPath"
             Write-Host "Running roslynator analyze on $slnPath"
             
-            roslynator analyze $slnPath -o $outputPath
+            roslynator analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d
           }
       - name: run roslynator analyze Linux
         if: runner.os != 'Windows'
@@ -197,7 +195,7 @@ jobs:
             echo "Running roslynator analyze on $slnFile"
             
             mkdir -p "$outputDir"
-            roslynator analyze "$slnFile" -o "$outputPath"
+            roslynator analyze "$slnFile" -o "$outputPath" -v d
           fi
 
   commit:
