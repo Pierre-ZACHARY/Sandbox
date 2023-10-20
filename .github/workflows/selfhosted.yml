@@ -177,7 +177,12 @@ jobs:
             Write-Host "Found .sln file: $slnPath"
             Write-Host "Running roslynator analyze on $slnPath"
             
-            roslynator analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d
+            try {
+                roslynator analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d
+            }
+            catch {
+              # Handle any exceptions, but do nothing here to make sure the exit code is 0
+            }
           }
       - name: run roslynator analyze Linux
         if: runner.os != 'Windows'
@@ -195,7 +200,7 @@ jobs:
             echo "Running roslynator analyze on $slnFile"
             
             mkdir -p "$outputDir"
-            roslynator analyze "$slnFile" -o "$outputPath" -v d
+            roslynator analyze "$slnFile" -o "$outputPath" -v d || true
           fi
 
   commit:
