@@ -19,7 +19,6 @@ jobs:
     steps:
       - name: Check dotCover Windows
         if: runner.os == 'Windows'
-        shell: powershell
         run: |
           $exePath = "..\dotCover\dotCover.exe"
   
@@ -97,7 +96,6 @@ jobs:
           fi
       - name: Check if Unity is in PATH Windows
         if: runner.os == 'Windows'
-        shell: powershell
         run: |
           $UNITY_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'unity.exe' | Select-Object -ExpandProperty Source
           if ($UNITY_PATH) {
