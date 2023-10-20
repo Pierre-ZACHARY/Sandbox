@@ -206,13 +206,15 @@ jobs:
     steps:
       - name: move output
         run: |
+          rm -r CiOutput 
           mv ../CiOutput ./CiOutput
       - name: Push
         run: |
-          git checkout -b CI
+          git branch
+          git checkout CI
           git add ./CiOutput
           git commit -m "CI commit for $(git branch --show-current)/$(git rev-parse HEAD)"
-          git push origin/CI
+          git push origin CI
       - name: rm output
         run: |
           rm -r CiOutput
