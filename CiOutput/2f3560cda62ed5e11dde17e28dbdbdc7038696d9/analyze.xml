@@ -1,0 +1,2011 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Roslynator>
+  <CodeAnalysis>
+    <Summary>
+      <Diagnostic Id="CS8019" Title="Directive using non nécessaire" Count="6">
+        <HelpLink>https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&amp;k=k(CS8019)</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="RCS1036" Title="Remove unnecessary blank line." Count="4">
+        <HelpLink>https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1036</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="RCS1110" Title="Declare type inside namespace." Count="2">
+        <HelpLink>https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1110</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="RCS1123" Title="Add parentheses when necessary." Count="1">
+        <HelpLink>https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1123</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="RCS1169" Title="Make field read-only." Count="4">
+        <HelpLink>https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1169</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="RCS1213" Title="Remove unused member declaration." Count="2">
+        <HelpLink>https://josefpihrt.github.io/docs/roslynator/analyzers/RCS1213</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="S1066" Title="Collapsible &quot;if&quot; statements should be merged" Count="1">
+        <Description>Merging collapsible if statements increases the code’s readability.</Description>
+        <HelpLink>https://rules.sonarsource.com/csharp/RSPEC-1066</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="S1199" Title="Nested code blocks should not be used" Count="1">
+        <Description>Nested code blocks can be used to create a new scope and restrict the visibility of the variables defined inside it. Using this feature in a method typically indicates that the method has too many responsibilities, and should be refactored into smaller methods.</Description>
+        <HelpLink>https://rules.sonarsource.com/csharp/RSPEC-1199</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="S1481" Title="Unused local variables should be removed" Count="2">
+        <Description>If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will not wonder what the variable is used for.</Description>
+        <HelpLink>https://rules.sonarsource.com/csharp/RSPEC-1481</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="S2699" Title="Tests should include assertions" Count="3">
+        <Description>The rule targets test methods that lack an assertion and consist solely of an action and, optionally, a setup.</Description>
+        <HelpLink>https://rules.sonarsource.com/csharp/RSPEC-2699</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="S2933" Title="Fields that are only assigned in the constructor should be &quot;readonly&quot;" Count="2">
+        <Description>readonly fields can only be assigned in a class constructor. If a class has a field that’s not marked readonly but is only set in the constructor, it could cause confusion about the field’s intended use. To avoid confusion, such fields should be marked readonly to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</Description>
+        <HelpLink>https://rules.sonarsource.com/csharp/RSPEC-2933</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="S3903" Title="Types should be defined in named namespaces" Count="2">
+        <Description>Types are declared in namespaces in order to prevent name collisions and as a way to organize them into the object hierarchy. Types that are defined outside any named namespace are in a global namespace that cannot be referenced in code.</Description>
+        <HelpLink>https://rules.sonarsource.com/csharp/RSPEC-3903</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1012" Title="Opening braces should be spaced correctly" Count="1">
+        <Description>An opening brace within a C# element is not spaced correctly.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1012.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1013" Title="Closing braces should be spaced correctly" Count="1">
+        <Description>A closing brace within a C# element is not spaced correctly.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1013.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1101" Title="Prefix local calls with this" Count="89">
+        <Description>A call to an instance member of the local class or a base class is not prefixed with 'this.', within a C# code file.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1101.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1132" Title="Do not combine fields" Count="1">
+        <Description>Each field should be declared on its own line, in order to clearly see each field of a type and allow for proper documentation of the behavior of each field.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1132.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1133" Title="Do not combine attributes" Count="2">
+        <Description>Each attribute usage should be placed in its own set of square brackets for maximum readability.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1133.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1134" Title="Attributes should not share line" Count="4">
+        <Description>Each attribute should be placed on its own line of code.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1134.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1200" Title="Using directives should be placed correctly" Count="12">
+        <Description>A C# using directive is placed outside of a namespace element.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1200.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1201" Title="Elements should appear in the correct order" Count="6">
+        <Description>An element within a C# code file is out of order in relation to the other elements in the code.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1201.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1202" Title="Elements should be ordered by access" Count="4">
+        <Description>An element within a C# code file is out of order in relation to other elements in the code.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1202.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1208" Title="System using directives should be placed before other using directives" Count="5">
+        <Description>A using directive which declares a member of the 'System' namespace appears after a using directive which declares a member of a different namespace, within a C# code file.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1208.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1210" Title="Using directives should be ordered alphabetically by namespace" Count="2">
+        <Description>The using directives within a C# code file are not sorted alphabetically by namespace.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1210.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1303" Title="Const field names should begin with upper-case letter" Count="1">
+        <Description>The name of a constant C# field should begin with an upper-case letter.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1303.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1307" Title="Accessible fields should begin with upper-case letter" Count="20">
+        <Description>The name of a public or internal field in C# does not begin with an upper-case letter.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1307.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1308" Title="Variable names should not be prefixed" Count="7">
+        <Description>A field name in C# is prefixed with 'm_', 's_', or 't_'.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1308.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1310" Title="Field names should not contain underscore" Count="1">
+        <Description>A field name in C# contains an underscore.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1310.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1400" Title="Access modifier should be declared" Count="30">
+        <Description>The access modifier for a C# element has not been explicitly defined.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1400.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1401" Title="Fields should be private" Count="20">
+        <Description>A field within a C# class has an access modifier other than private.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1401.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1407" Title="Arithmetic expressions should declare precedence" Count="1">
+        <Description>A C# statement contains a complex arithmetic expression which omits parenthesis around operators.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1407.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1502" Title="Element should not be on a single line" Count="4">
+        <Description>A C# element containing opening and closing braces is written completely on a single line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1502.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1503" Title="Braces should not be omitted" Count="2">
+        <Description>The opening and closing braces for a C# statement have been omitted.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1503.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1505" Title="Opening braces should not be followed by blank line" Count="3">
+        <Description>An opening brace within a C# element, statement, or expression is followed by a blank line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1505.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1507" Title="Code should not contain multiple blank lines in a row" Count="1">
+        <Description>The C# code contains multiple blank lines in a row.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1507.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1508" Title="Closing braces should not be preceded by blank line" Count="2">
+        <Description>A closing brace within a C# element, statement, or expression is preceded by a blank line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1508.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1512" Title="Single-line comments should not be followed by blank line" Count="3">
+        <Description>A single-line comment within C# code is followed by a blank line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1512.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1513" Title="Closing brace should be followed by blank line" Count="9">
+        <Description>A closing brace within a C# element, statement, or expression is not followed by a blank line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1513.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1515" Title="Single-line comment should be preceded by blank line" Count="1">
+        <Description>A single-line comment within C# code is not preceded by a blank line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1515.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1516" Title="Elements should be separated by blank line" Count="4">
+        <Description>Adjacent C# elements are not separated by a blank line.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1516.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1600" Title="Elements should be documented" Count="26">
+        <Description>A C# code element is missing a documentation header.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SA1633" Title="File should have header" Count="5">
+        <Description>A C# code file is missing a standard file header.</Description>
+        <HelpLink>https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SCS0001" Title="Potential Command Injection vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'." Count="2">
+        <Description>The untrusted value passed to the command execution should be validated.</Description>
+        <HelpLink>https://security-code-scan.github.io/#SCS0001</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SCS0003" Title="Potential XPath injection vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'." Count="1">
+        <Description>The untrusted value passed to the XPath query should be validated.</Description>
+        <HelpLink>https://security-code-scan.github.io/#SCS0003</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="SCS0018" Title="Potential Path Traversal vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'." Count="1">
+        <Description>The untrusted value passed to the redirect should be validated.</Description>
+        <HelpLink>https://security-code-scan.github.io/#SCS0018</HelpLink>
+      </Diagnostic>
+      <Diagnostic Id="UNT0024" Title="Give priority to scalar calculations over vector calculations" Count="1">
+        <Description>Scalar calculations are faster than vector calculations.</Description>
+        <HelpLink>https://github.com/microsoft/Microsoft.Unity.Analyzers/blob/main/doc/UNT0024.md</HelpLink>
+      </Diagnostic>
+    </Summary>
+    <Projects>
+      <Project Name="Assembly-CSharp-Editor" FilePath="C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assembly-CSharp-Editor.csproj">
+        <Diagnostics>
+          <Diagnostic Id="CS8019">
+            <Severity>Hidden</Severity>
+            <Message>Directive using non nécessaire</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="CS8019">
+            <Severity>Hidden</Severity>
+            <Message>Directive using non nécessaire</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="2" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="CS8019">
+            <Severity>Hidden</Severity>
+            <Message>Directive using non nécessaire</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="5" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="CS8019">
+            <Severity>Hidden</Severity>
+            <Message>Directive using non nécessaire</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="6" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="CS8019">
+            <Severity>Hidden</Severity>
+            <Message>Directive using non nécessaire</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="9" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1036">
+            <Severity>Info</Severity>
+            <Message>Remove unnecessary blank line.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="42" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1036">
+            <Severity>Info</Severity>
+            <Message>Remove unnecessary blank line.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="43" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1110">
+            <Severity>Info</Severity>
+            <Message>Declare type inside namespace.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="14" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1123">
+            <Severity>Info</Severity>
+            <Message>Add parentheses when necessary.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="74" Character="35" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1169">
+            <Severity>Info</Severity>
+            <Message>Make field read-only.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="16" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1169">
+            <Severity>Info</Severity>
+            <Message>Make field read-only.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="18" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="S1066">
+            <Severity>Warning</Severity>
+            <Message>Collapsible "if" statements should be merged</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="101" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="S1199">
+            <Severity>Warning</Severity>
+            <Message>Nested code blocks should not be used</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="77" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="S3903">
+            <Severity>Warning</Severity>
+            <Message>Types should be defined in named namespaces</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="14" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="71" Character="30" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="72" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="79" Character="43" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="86" Character="30" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="87" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="93" Character="50" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="97" Character="47" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="101" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="112" Character="39" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="115" Character="40" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="118" Character="42" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="121" Character="39" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="126" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="128" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="129" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="130" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="132" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="132" Character="37" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="133" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="135" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="135" Character="39" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="136" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="138" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="138" Character="36" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="139" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="141" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="142" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="144" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="149" Character="56" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="152" Character="25" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="159" Character="44" />
+          </Diagnostic>
+          <Diagnostic Id="SA1134">
+            <Severity>Warning</Severity>
+            <Message>Attributes should not share line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="113" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="SA1134">
+            <Severity>Warning</Severity>
+            <Message>Attributes should not share line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="116" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="SA1134">
+            <Severity>Warning</Severity>
+            <Message>Attributes should not share line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="119" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="SA1134">
+            <Severity>Warning</Severity>
+            <Message>Attributes should not share line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="122" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="SA1201">
+            <Severity>Warning</Severity>
+            <Message>Elements should appear in the correct order</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="110" Character="10" />
+          </Diagnostic>
+          <Diagnostic Id="SA1201">
+            <Severity>Warning</Severity>
+            <Message>Elements should appear in the correct order</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="113" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1201">
+            <Severity>Warning</Severity>
+            <Message>Elements should appear in the correct order</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="116" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1201">
+            <Severity>Warning</Severity>
+            <Message>Elements should appear in the correct order</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="119" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1201">
+            <Severity>Warning</Severity>
+            <Message>Elements should appear in the correct order</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="122" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1202">
+            <Severity>Warning</Severity>
+            <Message>Elements should be ordered by access</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="69" Character="29" />
+          </Diagnostic>
+          <Diagnostic Id="SA1202">
+            <Severity>Warning</Severity>
+            <Message>Elements should be ordered by access</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="84" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1208">
+            <Severity>Warning</Severity>
+            <Message>System using directives should be placed before other using directives</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="5" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1208">
+            <Severity>Warning</Severity>
+            <Message>System using directives should be placed before other using directives</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="6" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1208">
+            <Severity>Warning</Severity>
+            <Message>System using directives should be placed before other using directives</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="7" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1208">
+            <Severity>Warning</Severity>
+            <Message>System using directives should be placed before other using directives</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="8" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1208">
+            <Severity>Warning</Severity>
+            <Message>System using directives should be placed before other using directives</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="9" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1210">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be ordered alphabetically by namespace</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="2" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1210">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be ordered alphabetically by namespace</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="3" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="110" Character="10" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="113" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="116" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="119" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="122" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="16" Character="19" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="18" Character="18" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="25" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="40" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="51" Character="19" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="110" Character="10" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="112" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="113" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="115" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="116" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="118" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="119" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="121" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="122" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="124" Character="10" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="147" Character="10" />
+          </Diagnostic>
+          <Diagnostic Id="SA1407">
+            <Severity>Warning</Severity>
+            <Message>Arithmetic expressions should declare precedence</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="74" Character="35" />
+          </Diagnostic>
+          <Diagnostic Id="SA1502">
+            <Severity>Warning</Severity>
+            <Message>Element should not be on a single line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="112" Character="24" />
+          </Diagnostic>
+          <Diagnostic Id="SA1502">
+            <Severity>Warning</Severity>
+            <Message>Element should not be on a single line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="115" Character="25" />
+          </Diagnostic>
+          <Diagnostic Id="SA1502">
+            <Severity>Warning</Severity>
+            <Message>Element should not be on a single line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="118" Character="27" />
+          </Diagnostic>
+          <Diagnostic Id="SA1502">
+            <Severity>Warning</Severity>
+            <Message>Element should not be on a single line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="121" Character="24" />
+          </Diagnostic>
+          <Diagnostic Id="SA1503">
+            <Severity>Warning</Severity>
+            <Message>Braces should not be omitted</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="127" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1505">
+            <Severity>Warning</Severity>
+            <Message>Opening braces should not be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="41" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="SA1507">
+            <Severity>Warning</Severity>
+            <Message>Code should not contain multiple blank lines in a row</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="42" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="80" Character="10" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="94" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="98" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="105" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1515">
+            <Severity>Warning</Severity>
+            <Message>Single-line comment should be preceded by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="140" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1516">
+            <Severity>Warning</Severity>
+            <Message>Elements should be separated by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="113" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1516">
+            <Severity>Warning</Severity>
+            <Message>Elements should be separated by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="116" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1516">
+            <Severity>Warning</Severity>
+            <Message>Elements should be separated by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="119" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1516">
+            <Severity>Warning</Severity>
+            <Message>Elements should be separated by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="122" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="14" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="69" Character="29" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="84" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1633">
+            <Severity>Warning</Severity>
+            <Message>File should have header</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Editor\ReadmeEditor.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+        </Diagnostics>
+      </Project>
+      <Project Name="Assembly-CSharp" FilePath="C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assembly-CSharp.csproj">
+        <Diagnostics>
+          <Diagnostic Id="RCS1036">
+            <Severity>Info</Severity>
+            <Message>Remove unnecessary blank line.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="179" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1169">
+            <Severity>Info</Severity>
+            <Message>Make field read-only.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="63" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1169">
+            <Severity>Info</Severity>
+            <Message>Make field read-only.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="64" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1213">
+            <Severity>Info</Severity>
+            <Message>Remove unused member declaration.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="129" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1213">
+            <Severity>Info</Severity>
+            <Message>Remove unused member declaration.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="177" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="S1481">
+            <Severity>Warning</Severity>
+            <Message>Unused local variables should be removed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="186" Character="24" />
+          </Diagnostic>
+          <Diagnostic Id="S1481">
+            <Severity>Warning</Severity>
+            <Message>Unused local variables should be removed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="192" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="S2933">
+            <Severity>Warning</Severity>
+            <Message>Fields that are only assigned in the constructor should be "readonly"</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="63" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="S2933">
+            <Severity>Warning</Severity>
+            <Message>Fields that are only assigned in the constructor should be "readonly"</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="64" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1012">
+            <Severity>Warning</Severity>
+            <Message>Opening braces should be spaced correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="190" Character="43" />
+          </Diagnostic>
+          <Diagnostic Id="SA1013">
+            <Severity>Warning</Severity>
+            <Message>Closing braces should be spaced correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="190" Character="62" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="26" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="27" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="28" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="29" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="30" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="31" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="36" Character="63" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="36" Character="70" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="36" Character="75" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="38" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="39" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="40" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="45" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="45" Character="34" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="46" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="46" Character="36" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="47" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="47" Character="35" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="49" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="49" Character="32" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="50" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="50" Character="32" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="51" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="51" Character="32" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="56" Character="45" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="56" Character="52" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="56" Character="57" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="57" Character="42" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="57" Character="45" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="57" Character="48" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="131" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="131" Character="50" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="132" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="132" Character="57" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="181" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="186" Character="29" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="197" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="206" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="212" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="219" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="221" Character="37" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="221" Character="93" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="222" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="225" Character="46" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="227" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="228" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="232" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="235" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="241" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="241" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="242" Character="44" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="244" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="248" Character="75" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="249" Character="75" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="250" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="250" Character="52" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="252" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1101">
+            <Severity>Warning</Severity>
+            <Message>Prefix local calls with this</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="252" Character="56" />
+          </Diagnostic>
+          <Diagnostic Id="SA1133">
+            <Severity>Warning</Severity>
+            <Message>Do not combine attributes</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="70" Character="97" />
+          </Diagnostic>
+          <Diagnostic Id="SA1133">
+            <Severity>Warning</Severity>
+            <Message>Do not combine attributes</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="80" Character="97" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="5" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="6" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="7" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="8" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="9" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1201">
+            <Severity>Warning</Severity>
+            <Message>Elements should appear in the correct order</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="61" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1202">
+            <Severity>Warning</Severity>
+            <Message>Elements should be ordered by access</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="68" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1202">
+            <Severity>Warning</Severity>
+            <Message>Elements should be ordered by access</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="172" Character="23" />
+          </Diagnostic>
+          <Diagnostic Id="SA1303">
+            <Severity>Warning</Severity>
+            <Message>Const field names should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="61" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="17" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="18" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="19" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="20" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="21" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="22" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="68" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="71" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="75" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="78" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="81" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="84" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="63" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1308">
+            <Severity>Warning</Severity>
+            <Message>Variable names should not be prefixed</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="64" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1310">
+            <Severity>Warning</Severity>
+            <Message>Field names should not contain underscore</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="61" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="15" Character="15" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="61" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="63" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="64" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="129" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="135" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="177" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="255" Character="15" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="264" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="277" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="288" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="297" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="308" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1400">
+            <Severity>Warning</Severity>
+            <Message>Access modifier should be declared</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="317" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="17" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="18" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="19" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="20" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="21" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="22" Character="26" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="68" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="71" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="75" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="78" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="81" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="84" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1503">
+            <Severity>Warning</Severity>
+            <Message>Braces should not be omitted</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="223" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1505">
+            <Severity>Warning</Severity>
+            <Message>Opening braces should not be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="178" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1512">
+            <Severity>Warning</Severity>
+            <Message>Single-line comments should not be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="195" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="147" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="151" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="155" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="159" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1513">
+            <Severity>Warning</Severity>
+            <Message>Closing brace should be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="163" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="13" Character="18" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="68" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="71" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="75" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="78" Character="31" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="81" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="84" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="172" Character="23" />
+          </Diagnostic>
+          <Diagnostic Id="SA1633">
+            <Severity>Warning</Severity>
+            <Message>File should have header</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SCS0001">
+            <Severity>Warning</Severity>
+            <Message>Potential Command Injection vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="187" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SCS0003">
+            <Severity>Warning</Severity>
+            <Message>Potential XPath injection vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="192" Character="47" />
+          </Diagnostic>
+          <Diagnostic Id="SCS0018">
+            <Severity>Warning</Severity>
+            <Message>Potential Path Traversal vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="174" Character="38" />
+          </Diagnostic>
+          <Diagnostic Id="UNT0024">
+            <Severity>Info</Severity>
+            <Message>Give priority to scalar calculations over vector calculations</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Scripts\SimpleCameraController.cs</FilePath>
+            <Location Line="221" Character="37" />
+          </Diagnostic>
+          <Diagnostic Id="RCS1110">
+            <Severity>Info</Severity>
+            <Message>Declare type inside namespace.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="4" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="S3903">
+            <Severity>Warning</Severity>
+            <Message>Types should be defined in named namespaces</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="4" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1132">
+            <Severity>Warning</Severity>
+            <Message>Do not combine fields</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="6" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="7" Character="19" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="8" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="9" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="23" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="32" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="38" />
+          </Diagnostic>
+          <Diagnostic Id="SA1307">
+            <Severity>Warning</Severity>
+            <Message>Accessible fields should begin with upper-case letter</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="48" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="6" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="7" Character="19" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="8" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="9" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="23" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="32" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="38" />
+          </Diagnostic>
+          <Diagnostic Id="SA1401">
+            <Severity>Warning</Severity>
+            <Message>Fields should be private</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="48" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="4" Character="14" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="6" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="7" Character="19" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="8" Character="22" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="9" Character="17" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="12" Character="18" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="23" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="32" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="38" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="14" Character="48" />
+          </Diagnostic>
+          <Diagnostic Id="SA1633">
+            <Severity>Warning</Severity>
+            <Message>File should have header</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\TutorialInfo\Scripts\Readme.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+        </Diagnostics>
+      </Project>
+      <Project Name="EditmodeTestsAssembly" FilePath="C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\EditmodeTestsAssembly.csproj">
+        <Diagnostics>
+          <Diagnostic Id="RCS1036">
+            <Severity>Info</Severity>
+            <Message>Remove unnecessary blank line.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="7" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="S2699">
+            <Severity>Warning</Severity>
+            <Message>Tests should include assertions</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="9" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1505">
+            <Severity>Warning</Severity>
+            <Message>Opening braces should not be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="6" Character="5" />
+          </Diagnostic>
+          <Diagnostic Id="SA1508">
+            <Severity>Warning</Severity>
+            <Message>Closing braces should not be preceded by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="13" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1512">
+            <Severity>Warning</Severity>
+            <Message>Single-line comments should not be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="11" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="5" Character="18" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="9" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1633">
+            <Severity>Warning</Severity>
+            <Message>File should have header</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Editmode\EditmodeTest.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+        </Diagnostics>
+      </Project>
+      <Project Name="PlaymodeTestsAssembly" FilePath="C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\PlaymodeTestsAssembly.csproj">
+        <Diagnostics>
+          <Diagnostic Id="CS8019">
+            <Severity>Hidden</Severity>
+            <Message>Directive using non nécessaire</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="4" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="S2699">
+            <Severity>Warning</Severity>
+            <Message>Tests should include assertions</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="13" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="S2699">
+            <Severity>Warning</Severity>
+            <Message>Tests should include assertions</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="22" Character="28" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="2" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="3" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="4" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="5" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1200">
+            <Severity>Warning</Severity>
+            <Message>Using directives should be placed correctly</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="6" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SA1508">
+            <Severity>Warning</Severity>
+            <Message>Closing braces should not be preceded by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="17" Character="9" />
+          </Diagnostic>
+          <Diagnostic Id="SA1512">
+            <Severity>Warning</Severity>
+            <Message>Single-line comments should not be followed by blank line</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="15" Character="13" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="10" Character="18" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="13" Character="21" />
+          </Diagnostic>
+          <Diagnostic Id="SA1600">
+            <Severity>Warning</Severity>
+            <Message>Elements should be documented</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="22" Character="28" />
+          </Diagnostic>
+          <Diagnostic Id="SA1633">
+            <Severity>Warning</Severity>
+            <Message>File should have header</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="1" Character="1" />
+          </Diagnostic>
+          <Diagnostic Id="SCS0001">
+            <Severity>Warning</Severity>
+            <Message>Potential Command Injection vulnerability was found where '{0}' in '{1}' may be tainted by user-controlled data from '{2}' in method '{3}'.</Message>
+            <FilePath>C:\Users\Yukiix\actions-runner\_work\Sandbox\Sandbox\Assets\Tests\Playmode\PlaymodeTest.cs</FilePath>
+            <Location Line="31" Character="13" />
+          </Diagnostic>
+        </Diagnostics>
+      </Project>
+    </Projects>
+  </CodeAnalysis>
+</Roslynator>
