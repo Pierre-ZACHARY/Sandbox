@@ -204,20 +204,38 @@ jobs:
     runs-on: self-hosted
     needs: [tests, analyze]
     steps:
+      - name: remove CiOutput if it exists Windows
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $folderToRemove="./CiOutput"
+          
+          if (Test-Path $folderToRemove -PathType Container) {
+            Remove-Item -Path $folderToRemove -Recurse -Force
+          } else {
+            Write-Host "Folder does not exist."
+          }
+      - name: remove CiOutput if it exists Linux
+        if: runner.os != 'Windows'
+        run: |
+          folder_to_remove="./CiOutput"
+  
+          if [ -d "$folder_to_remove" ]; then
+            rm -r "$folder_to_remove"
+          else
+            echo "Folder does not exist."
+          fi
       - name: move output
         run: |
-          rm -r CiOutput 
+          git reset --hard
           mv ../CiOutput ./CiOutput
       - name: Push
         run: |
-          git branch
+          git fetch origin CI
           git checkout CI
           git add ./CiOutput
           git commit -m "CI commit for $(git branch --show-current)/$(git rev-parse HEAD)"
           git push origin CI
-      - name: rm output
-        run: |
-          rm -r CiOutput
 
   cleanup:
     runs-on: self-hosted
