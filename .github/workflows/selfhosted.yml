@@ -119,7 +119,7 @@ jobs:
         run: unity -batchmode -quit -projectPath . -logfile -
       - name: Create output directory 
         run: |
-          $path = "../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)"
+          mkdir -p "../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)"
 
   tests:
     runs-on: self-hosted
@@ -146,6 +146,7 @@ jobs:
             Invoke-WebRequest -Uri $url -OutFile $outputPath -Verbose
             ./dotnet-install.ps1 -Channel LTS -InstallDir $HOME/.dotnet
             ./dotnet-install.ps1 -Channel LTS -Runtime dotnet -InstallDir $HOME/.dotnet
+            [System.Environment]::SetEnvironmentVariable("DOTNET_ROOT", "$HOME/.dotnet", [System.EnvironmentVariableTarget]::User)
             [System.Environment]::SetEnvironmentVariable("PATH", $Env:PATH + ";$HOME/.dotnet;$HOME/.dotnet/tools", [System.EnvironmentVariableTarget]::User)
             $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
             dotnet tool install -g roslynator.dotnet.cli
