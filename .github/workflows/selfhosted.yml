@@ -208,13 +208,11 @@ jobs:
         run: |
           mv ../CiOutput ./CiOutput
       - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: CI # The branch name where you want to push the assets
-          FOLDER: CiOutput # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: "Update CI output from $(git branch --show-current)/$(git rev-parse HEAD)" # The commit message
+        run: |
+          git checkout -b CI
+          git add ./CiOutput
+          git commit -m "CI commit for $(git branch --show-current)/$(git rev-parse HEAD)"
+          git push origin/CI
       - name: rm output
         run: |
           rm -r CiOutput
