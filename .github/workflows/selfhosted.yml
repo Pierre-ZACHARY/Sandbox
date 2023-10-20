@@ -232,9 +232,10 @@ jobs:
       - name: Push
         run: |
           git fetch origin CI
+          $commitMessage="CI commit for $(git branch --show-current)/$(git rev-parse HEAD)"
           git checkout CI
           git add ./CiOutput
-          git commit -m "CI commit for $(git branch --show-current)/$(git rev-parse HEAD)"
+          git commit -m "$commitMessage"
           git push origin CI
 
   cleanup:
