@@ -167,6 +167,7 @@ jobs:
           fi
       - name: run roslynator analyze Windows
         if: runner.os == 'Windows'
+        continue-on-error: true
         run: |
           $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
           if ($slnFile -eq $null) {
@@ -177,15 +178,11 @@ jobs:
             Write-Host "Found .sln file: $slnPath"
             Write-Host "Running roslynator analyze on $slnPath"
             
-            try {
-                roslynator analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d
-            }
-            catch {
-              # Handle any exceptions, but do nothing here to make sure the exit code is 0
-            }
+            roslynator analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
           }
       - name: run roslynator analyze Linux
         if: runner.os != 'Windows'
+        continue-on-error: true
         run: |
           slnFile=$(find . -type f -name "*.sln" | head -n 1)
   
@@ -200,7 +197,7 @@ jobs:
             echo "Running roslynator analyze on $slnFile"
             
             mkdir -p "$outputDir"
-            roslynator analyze "$slnFile" -o "$outputPath" -v d || true
+            roslynator analyze "$slnFile" -o "$outputPath" -v d --report-suppressed-diagnostics -a ./Packages
           fi
 
   commit:
