@@ -164,7 +164,7 @@ jobs:
           } else {
             Write-Host "dotnet.exe does not exist at the specified location, downloading it."
             $url = "https://dot.net/v1/dotnet-install.ps1"
-            $outputPath = "..\dotnet-install.ps1"
+            $outputPath = "./dotnet-install.ps1"
             Invoke-WebRequest -Uri $url -OutFile $outputPath -Verbose
             ./dotnet-install.ps1 -Channel LTS -InstallDir ../dotnet
             ./dotnet-install.ps1 -Channel LTS -Runtime dotnet -InstallDir ../dotnet
@@ -196,7 +196,7 @@ jobs:
   analyze-roslyn:
     name: Roslynator Analyze
     runs-on: self-hosted
-    needs: setup
+    needs: dotnetsetup
     env:
       DOTNET_ROOT: ../dotnet
     steps:
