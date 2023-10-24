@@ -16,7 +16,36 @@ jobs:
     runs-on: self-hosted
     env:
       DOTCOVER_VERSION: 2023.2.2
+      MINGIT_URL: https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.2/MinGit-2.42.0.2-64-bit.zip
     steps:
+      - name: Check portable Git Windows
+        if: runner.os == 'Windows'
+        run: |
+          $gitPath = "..\PortableGit\cmd\git.exe"
+  
+          if (Test-Path -Path $gitPath -PathType Leaf) {
+            Write-Host "Portable Git exists at the specified location."
+          } else {
+            Write-Host "Portable Git does not exist at the specified location, downloading it."
+            echo "Downloading Portable Git from $url"
+            $outputPath = "..\PortableGit.zip"
+            $extractPath = "..\PortableGit"
+            
+            Invoke-WebRequest -Uri $env:MINGIT_URL -OutFile $outputPath -Verbose
+            Expand-Archive -Path $outputPath -DestinationPath $extractPath -Force -Verbose
+            Remove-Item -Path $outputPath -Force -Verbose
+          }
+          $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Machine) + "..\PortableGit\cmd\"
+      - name: Check Git Linux and macOS
+        if: runner.os != 'Windows'
+        run: |
+            # check if git is installed and if not install it
+              if ! command -v git &> /dev/null
+              then
+                echo "Git is not installed, installing it."
+                sudo apt-get update
+                sudo apt-get install git
+              fi
       - name: Check dotCover Windows
         if: runner.os == 'Windows'
         run: |
@@ -66,7 +95,6 @@ jobs:
           mkdir -p "$extract_path"
           tar -xzvf "$output_path" -C "$extract_path"
           rm "$output_path"
-
       - name: Check out code
         uses: actions/checkout@v2
       - name: Check if Unity is in PATH Linux
@@ -121,54 +149,62 @@ jobs:
         run: |
           mkdir -p "../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)"
 
-  tests:
+
+  dotnetsetup:
     runs-on: self-hosted
     needs: setup
     steps:
-      - name: list
-        run: dir
-        
-  analyze:
-    runs-on: self-hosted
-    needs: setup
-    steps:
-      - name: check roslynator is installed Windows
+      - name: setup dotnet Windows
         if: runner.os == 'Windows'
-        shell: powershell
         run: |
-          $ROSLYNATOR_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'roslynator.exe' | Select-Object -ExpandProperty Source
-          if($ROSLYNATOR_PATH) {
-            Write-Host "Roslynator is installed and is located at: $ROSLYNATOR_PATH"
-          }
-          else{
+          $exePath = "..\dotnet\dotnet.exe"
+          
+          if(Test-Path -Path $exePath -PathType Leaf) {
+            Write-Host "dotnet.exe exists at the specified location."
+          } else {
+            Write-Host "dotnet.exe does not exist at the specified location, downloading it."
             $url = "https://dot.net/v1/dotnet-install.ps1"
-            $outputPath = "./dotnet-install.ps1"
+            $outputPath = "..\dotnet-install.ps1"
             Invoke-WebRequest -Uri $url -OutFile $outputPath -Verbose
-            ./dotnet-install.ps1 -Channel LTS -InstallDir $HOME/.dotnet
-            ./dotnet-install.ps1 -Channel LTS -Runtime dotnet -InstallDir $HOME/.dotnet
-            [System.Environment]::SetEnvironmentVariable("DOTNET_ROOT", "$HOME/.dotnet", [System.EnvironmentVariableTarget]::User)
-            [System.Environment]::SetEnvironmentVariable("PATH", $Env:PATH + ";$HOME/.dotnet;$HOME/.dotnet/tools", [System.EnvironmentVariableTarget]::User)
-            $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
-            dotnet tool install -g roslynator.dotnet.cli
+            ./dotnet-install.ps1 -Channel LTS -InstallDir ../dotnet
+            ./dotnet-install.ps1 -Channel LTS -Runtime dotnet -InstallDir ../dotnet
           }
-      - name: check roslynator is installed Linux
+      - name: setup dotnet Linux
         if: runner.os != 'Windows'
         run: |
-          if ! command -v roslynator &> /dev/null
+          if [ ! -e "../dotnet/dotnet.sh" ]; then
           then
-            wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
-            chmod +x dotnet-install.sh
-            ./dotnet-install.sh --version latest
-            ./dotnet-install.sh --version latest --runtime 'dotnet'
-            echo "export DOTNET_ROOT=$HOME/.dotnet" >> ~/.bashrc
-            echo "export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools" >> ~/.bashrc
-            source ~/.bashrc
-            dotnet tool install -g roslynator.dotnet.cli
+              wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+              chmod +x dotnet-install.sh
+              ./dotnet-install.sh --version latest
+              ./dotnet-install.sh --version latest --runtime 'dotnet'
           fi
+
+  sonarbegin:
+    runs-on: self-hosted
+    needs: dotnetsetup
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      DOTNET_ROOT: ../dotnet
+    steps:
+      - name: Sonar Begin
+        run: |
+          $env:DOTNET_ROOT/dotnet tool install --global dotnet-sonarscanner
+          $env:DOTNET_ROOT/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
+          
+
+  analyze-roslyn:
+    name: Roslynator Analyze
+    runs-on: self-hosted
+    needs: setup
+    env:
+      DOTNET_ROOT: ../dotnet
+    steps:
       - name: run roslynator analyze Windows
         if: runner.os == 'Windows'
         continue-on-error: true
         run: |
+          $env:DOTNET_ROOT/dotnet.exe tool install -g roslynator.dotnet.cli
           $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
           if ($slnFile -eq $null) {
               Write-Host "No .sln file found in the directory and its subdirectories."
@@ -178,12 +214,13 @@ jobs:
             Write-Host "Found .sln file: $slnPath"
             Write-Host "Running roslynator analyze on $slnPath"
             
-            roslynator analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
+            $env:DOTNET_ROOT/tools/roslynator.exe analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
           }
       - name: run roslynator analyze Linux
         if: runner.os != 'Windows'
         continue-on-error: true
         run: |
+          $env:DOTNET_ROOT/dotnet tool install -g roslynator.dotnet.cli
           slnFile=$(find . -type f -name "*.sln" | head -n 1)
   
           if [ -z "$slnFile" ]; then
@@ -197,12 +234,31 @@ jobs:
             echo "Running roslynator analyze on $slnFile"
             
             mkdir -p "$outputDir"
-            roslynator analyze "$slnFile" -o "$outputPath" -v d --report-suppressed-diagnostics -a ./Packages
+            $env:DOTNET_ROOT/tools/roslynator analyze "$slnFile" -o "$outputPath" -v d --report-suppressed-diagnostics -a ./Packages
           fi
+
+  tests:
+    runs-on: self-hosted
+    needs: sonarbegin
+    steps:
+      - name: list
+        run: dir
+
+
+  sonarend:
+    runs-on: self-hosted
+    needs: tests
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      DOTNET_ROOT: ../dotnet
+    steps:
+      - name: Sonar End
+        run: |
+          $env:DOTNET_ROOT/tools/dotnet-sonarscanner end /d:sonar.login=$env:SONAR_TOKEN
 
   commit:
     runs-on: self-hosted
-    needs: [tests, analyze]
+    needs: [tests, analyze-roslyn]
     steps:
       - name: remove CiOutput if it exists Windows
         if: runner.os == 'Windows'
