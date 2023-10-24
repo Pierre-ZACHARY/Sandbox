@@ -26,6 +26,7 @@ public class CiProfiler
         {
             if (commandLineArgs[i] == "-profiler-log-file")
             {
+                Debug.Log("Profiler log file path: " + commandLineArgs[i + 1]);
                 return commandLineArgs[i + 1];
             }
         }

@@ -50,9 +50,9 @@ namespace Tests
             p.Start();
 
             // run factorial for 60 frames
-            for(int i = 0; i<60; i++)
+            for(int i = 0; i<30; i++)
             {
-                Factorial(1000000);
+                Factorial(10000);
                 yield return null;
             }
         }

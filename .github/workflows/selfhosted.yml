@@ -1,5 +1,5 @@
 name: Self-hosted Runner Workflow
-
+# TODO could use bash on windows to unify the syntax
 on:
   workflow_dispatch: {}
   push:
@@ -46,6 +46,7 @@ jobs:
                 sudo apt-get update
                 sudo apt-get install git
               fi
+      # TODO could install dotCover from dotnet
       - name: Check dotCover Windows
         if: runner.os == 'Windows'
         run: |
