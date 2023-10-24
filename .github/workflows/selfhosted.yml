@@ -247,18 +247,28 @@ jobs:
     runs-on: self-hosted
     needs: sonarbegin
     steps:
-      - name: Generate report
+      - name: Generate report Windows
         if: runner.os == 'Windows'
         run: |
           $UNITY_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'unity.exe' | Select-Object -ExpandProperty Source
           $filter = "-:Unity*;-:com.unity*;-:Cinemachine;-:CustomEditor;-:YamlDotNet*"
-          ../dotCover/dotCover.exe cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform playmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsPlayMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/playmodeProfile.raw" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /Filters=$filter
-          ../dotCover/dotCover.exe cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform editmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsEditMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/editmodeProfile.raw" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode" /Filters=$filter
+          ../dotCover/dotCover.exe cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform playmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsPlayMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/playmodeProfile.raw -quit -logFile -" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /Filters=$filter
+          ../dotCover/dotCover.exe cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform editmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsEditMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/editmodeProfile.raw -quit -logFile -" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode" /Filters=$filter
           ../dotCover/dotCover.exe merge /source:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode;../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both
           ../dotCover/dotCover.exe report /source:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.html /reporttype:HTML
           ../dotCover/dotCover.exe report /source:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.json /reporttype:JSON
-          unity -batchmode -projectPath . -executeMethod "Editor.GetProfilerSnapshotInfo.GetProfilerSnapshot" -logFile ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/profilerReport.log -quit
-
+          unity -batchmode -projectPath . -executeMethod "Editor.GetProfilerSnapshotInfo.GetProfilerSnapshot" -logFile ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/profilerReport.log -quit -logfile -
+      - name: Generate report Linux
+        if: runner.os != 'Windows'
+        run: |
+          UNITY_PATH=$(which unity)
+          filter="-:Unity*;-:com.unity*;-:Cinemachine;-:CustomEditor;-:YamlDotNet*"
+          ../dotCover/dotCover.sh cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform playmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsPlayMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/playmodeProfile.raw -quit -logFile -" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /Filters=$filter
+          ../dotCover/dotCover.sh cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform editmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsEditMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/editmodeProfile.raw -quit -logFile -" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode" /Filters=$filter
+          ../dotCover/dotCover.sh merge /source:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode;../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both
+          ../dotCover/dotCover.sh report /source:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.html /reporttype:HTML
+          ../dotCover/dotCover.sh report /source:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.json /reporttype:JSON
+          unity -batchmode -projectPath . -executeMethod "Editor.GetProfilerSnapshotInfo.GetProfilerSnapshot" -logFile ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/profilerReport.log -quit -logfile -
 
   sonarend:
     name: Sonar End
