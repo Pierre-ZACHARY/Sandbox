@@ -186,21 +186,30 @@ jobs:
     needs: dotnetsetup
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+      SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      DOTNET_ROOT: ../dotnet
     steps:
       - name: Sonar Begin
+        if: runner.os == 'Windows'
+        shell: powershell
         run: |
-          if [ "$RUNNER_OS" == "Linux" ]; then
-            export DOTNET_ROOT="../dotnet"
-          else
-            $DOTNET_ROOT = "..\dotnet"
-          fi
           ../dotnet/dotnet tool install --tool-path ../dotnet/tools dotnet-sonarscanner
           ../dotnet/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
+      - name: Sonar Begin Linux
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          ../dotnet/dotnet tool install --tool-path ../dotnet/tools dotnet-sonarscanner
+          ../dotnet/tools/dotnet-sonarscanner begin /o:$SONAR_ORGANIZATION /k:$SONAR_PROJECT_KEY /d:sonar.host.url=$SONAR_HOST_URL
           
 
   analyze-roslyn:
     name: Roslynator Analyze
     runs-on: self-hosted
+    env:
+      DOTNET_ROOT: ../dotnet
     needs: dotnetsetup
     steps:
       - name: run roslynator analyze Windows
@@ -217,7 +226,7 @@ jobs:
             Write-Host "Found .sln file: $slnPath"
             Write-Host "Running roslynator analyze on $slnPath"
             
-            ../dotnet/tools/roslynator.exe analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
+            ../dotnet/tools/roslynator.exe analyze $slnFile -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
           }
       - name: run roslynator analyze Linux
         if: runner.os != 'Windows'
@@ -256,9 +265,15 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       DOTNET_ROOT: ../dotnet
     steps:
-      - name: Sonar End
+      - name: Sonar End Windows
+        if: runner.os == 'Windows'
         run: |
           ../dotnet/tools/dotnet-sonarscanner end /d:sonar.login=$env:SONAR_TOKEN
+            - name: Sonar End Windows
+      - name: Sonar End Linux
+        if: runner.os != 'Windows'
+        run: |
+          ../dotnet/tools/dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
 
   commit:
     runs-on: self-hosted
