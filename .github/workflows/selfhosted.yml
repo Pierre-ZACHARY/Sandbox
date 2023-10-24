@@ -185,26 +185,23 @@ jobs:
     needs: dotnetsetup
     env:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      DOTNET_ROOT: ../dotnet
     steps:
       - name: Sonar Begin
         run: |
-          $env:DOTNET_ROOT/dotnet tool install --global dotnet-sonarscanner
-          $env:DOTNET_ROOT/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
+          ../dotnet/dotnet tool install --global dotnet-sonarscanner
+          ../dotnet/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
           
 
   analyze-roslyn:
     name: Roslynator Analyze
     runs-on: self-hosted
     needs: dotnetsetup
-    env:
-      DOTNET_ROOT: ../dotnet
     steps:
       - name: run roslynator analyze Windows
         if: runner.os == 'Windows'
         continue-on-error: true
         run: |
-          $env:DOTNET_ROOT/dotnet.exe tool install -g roslynator.dotnet.cli
+          ../dotnet/dotnet.exe tool install -g roslynator.dotnet.cli
           $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
           if ($slnFile -eq $null) {
               Write-Host "No .sln file found in the directory and its subdirectories."
@@ -214,13 +211,13 @@ jobs:
             Write-Host "Found .sln file: $slnPath"
             Write-Host "Running roslynator analyze on $slnPath"
             
-            $env:DOTNET_ROOT/tools/roslynator.exe analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
+            ../dotnet/tools/roslynator.exe analyze $slnPath -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
           }
       - name: run roslynator analyze Linux
         if: runner.os != 'Windows'
         continue-on-error: true
         run: |
-          $env:DOTNET_ROOT/dotnet tool install -g roslynator.dotnet.cli
+          ../dotnet/dotnet tool install -g roslynator.dotnet.cli
           slnFile=$(find . -type f -name "*.sln" | head -n 1)
   
           if [ -z "$slnFile" ]; then
@@ -234,7 +231,7 @@ jobs:
             echo "Running roslynator analyze on $slnFile"
             
             mkdir -p "$outputDir"
-            $env:DOTNET_ROOT/tools/roslynator analyze "$slnFile" -o "$outputPath" -v d --report-suppressed-diagnostics -a ./Packages
+            ../dotnet/tools/roslynator analyze "$slnFile" -o "$outputPath" -v d --report-suppressed-diagnostics -a ./Packages
           fi
 
   tests:
