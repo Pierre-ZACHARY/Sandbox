@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Xml;
 using NUnit.Framework;
+using UnityEngine.Profiling;
 using UnityEngine.TestTools;
 
 namespace Tests
@@ -14,6 +15,23 @@ namespace Tests
         {
             // Use the Assert class to test conditions.
 
+        }
+
+        /// <summary>
+        /// This is a summary description of the MyMethod.
+        /// </summary>
+        /// <returns>Description of the return value.</returns>
+        public static int Factorial(int n)
+        {
+            CiProfiler.BeginSample("Factorial");
+            int result = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                result *= i;
+            }
+            Profiler.EndSample();
+
+            return result;
         }
 
         // A UnityTest behaves like a coroutine in PlayMode
@@ -30,6 +48,14 @@ namespace Tests
             string command = Console.ReadLine();
             p.StartInfo.Arguments = " -cl " + command + " -role user";
             p.Start();
+
+            // run factorial for 60 frames
+            for(int i = 0; i<60; i++)
+            {
+                Factorial(1000000);
+                yield return null;
+            }
         }
     }
+
 }

@@ -195,7 +195,7 @@ jobs:
         shell: powershell
         run: |
           ../dotnet/dotnet tool install --tool-path ../dotnet/tools dotnet-sonarscanner
-          ../dotnet/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
+          ../dotnet/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL /d:sonar.cs.dotcover.reportsPaths="../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.html"
       - name: Sonar Begin Linux
         if: runner.os != 'Windows'
         shell: bash
@@ -246,8 +246,17 @@ jobs:
     runs-on: self-hosted
     needs: sonarbegin
     steps:
-      - name: list
-        run: dir
+      - name: Generate report
+        if: runner.os == 'Windows'
+        run: |
+          $UNITY_PATH = Get-Command -ErrorAction SilentlyContinue -Name 'unity.exe' | Select-Object -ExpandProperty Source
+          $filter = "-:Unity*;-:com.unity*;-:Cinemachine;-:CustomEditor;-:YamlDotNet*"
+          ../dotCover/dotCover.exe cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform playmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsPlayMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/playmodeProfile.raw" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /Filters=$filter
+          ../dotCover/dotCover.exe cover /TargetExecutable:$UNITY_PATH /TargetArguments="-batchmode -projectPath . -runTests -testPlatform editmode -testResults ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/TestsResultsEditMode.xml -profiler-enable -profiler-log-file ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/editmodeProfile.raw" /Output:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode" /Filters=$filter
+          ../dotCover/dotCover.exe merge /source:"../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.editmode;../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.playmode" /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both
+          ../dotCover/dotCover.exe report /source:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.html /reporttype:HTML
+          ../dotCover/dotCover.exe report /source:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/snapshot.both /output:../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/report.json /reporttype:JSON
+          unity -batchmode -projectPath . -executeMethod "Editor.GetProfilerSnapshotInfo.GetProfilerSnapshot" -logFile ../CiOutput/$(git branch --show-current)/$(git rev-parse HEAD)/profilerReport.log -quit
 
 
   sonarend:
