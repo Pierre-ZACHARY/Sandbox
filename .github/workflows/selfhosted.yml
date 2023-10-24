@@ -181,7 +181,6 @@ jobs:
           fi
 
   sonarbegin:
-    name: Sonar Begin
     runs-on: self-hosted
     needs: dotnetsetup
     env:
@@ -203,7 +202,6 @@ jobs:
         run: |
           ../dotnet/dotnet tool install --tool-path ../dotnet/tools dotnet-sonarscanner
           ../dotnet/tools/dotnet-sonarscanner begin /o:$SONAR_ORGANIZATION /k:$SONAR_PROJECT_KEY /d:sonar.host.url=$SONAR_HOST_URL
-          
 
   analyze-roslyn:
     name: Roslynator Analyze
@@ -221,11 +219,6 @@ jobs:
           if ($slnFile -eq $null) {
               Write-Host "No .sln file found in the directory and its subdirectories."
           } else {
-            # Run roslynator analyze on the found .sln file
-            $slnPath = $slnFile.FullName          
-            Write-Host "Found .sln file: $slnPath"
-            Write-Host "Running roslynator analyze on $slnPath"
-            
             ../dotnet/tools/roslynator.exe analyze $slnFile -o "..\CiOutput\$(git branch --show-current)\$(git rev-parse HEAD)\analyze.xml" -v d --report-suppressed-diagnostics -a ./Packages
           }
       - name: run roslynator analyze Linux
@@ -268,12 +261,27 @@ jobs:
       - name: Sonar End Windows
         if: runner.os == 'Windows'
         run: |
+          $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
+          if ($slnFile -eq $null) {
+              Write-Host "No .sln file found in the directory and its subdirectories."
+          } else {
+            ../dotnet/dotnet.exe msbuild $slnFile -t:Rebuild
+          }
           ../dotnet/tools/dotnet-sonarscanner end /d:sonar.login=$env:SONAR_TOKEN
-            - name: Sonar End Windows
       - name: Sonar End Linux
         if: runner.os != 'Windows'
         run: |
-          ../dotnet/tools/dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+          slnFile=$(find . -type f -name "*.sln" | head -n 1)
+          
+          if [ -z "$slnFile" ]; then
+            echo "No .sln file found in the directory and its subdirectories."
+          else
+            # Run dotnet build on the found .sln file
+            echo "Found .sln file: $slnFile"
+            echo "Running dotnet build on $slnFile"
+            ../dotnet/dotnet msbuild "$slnFile" -t:Rebuild
+          fi
+          ../dotnet/tools/dotnet-sonarscanner end
 
   commit:
     runs-on: self-hosted
