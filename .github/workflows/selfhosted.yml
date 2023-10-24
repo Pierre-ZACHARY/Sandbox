@@ -267,7 +267,7 @@ jobs:
           } else {
             ../dotnet/dotnet.exe msbuild $slnFile -t:Rebuild
           }
-          ../dotnet/tools/dotnet-sonarscanner end /d:sonar.login=$env:SONAR_TOKEN
+          ../dotnet/tools/dotnet-sonarscanner end
       - name: Sonar End Linux
         if: runner.os != 'Windows'
         run: |
@@ -321,14 +321,3 @@ jobs:
           git commit -m "$commitMessage"
           git push origin CI
 
-  cleanup:
-    runs-on: self-hosted
-    needs: commit
-    steps:
-      - name: cleanup Windows
-        if: runner.os == 'Windows'
-        shell: powershell
-        run: Remove-Item * -Force -Recurse
-      - name: cleanup Linux
-        if: runner.os != 'Windows'
-        run: rm -r -- !(.) .*
