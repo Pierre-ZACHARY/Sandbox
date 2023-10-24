@@ -188,6 +188,11 @@ jobs:
     steps:
       - name: Sonar Begin
         run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            export DOTNET_ROOT="../dotnet"
+          else
+            $DOTNET_ROOT = "..\dotnet"
+          fi
           ../dotnet/dotnet tool install --global dotnet-sonarscanner
           ../dotnet/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
           
@@ -201,6 +206,7 @@ jobs:
         if: runner.os == 'Windows'
         continue-on-error: true
         run: |
+          $DOTNET_ROOT = "..\dotnet"
           ../dotnet/dotnet.exe tool install -g roslynator.dotnet.cli
           $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
           if ($slnFile -eq $null) {
@@ -217,6 +223,7 @@ jobs:
         if: runner.os != 'Windows'
         continue-on-error: true
         run: |
+          export DOTNET_ROOT="../dotnet"
           ../dotnet/dotnet tool install -g roslynator.dotnet.cli
           slnFile=$(find . -type f -name "*.sln" | head -n 1)
   
