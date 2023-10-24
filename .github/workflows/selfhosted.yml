@@ -181,6 +181,7 @@ jobs:
           fi
 
   sonarbegin:
+    name: Sonar Begin
     runs-on: self-hosted
     needs: dotnetsetup
     env:
@@ -193,7 +194,7 @@ jobs:
           else
             $DOTNET_ROOT = "..\dotnet"
           fi
-          ../dotnet/dotnet tool install --global dotnet-sonarscanner
+          ../dotnet/dotnet tool install --tool-path ../dotnet/tools dotnet-sonarscanner
           ../dotnet/tools/dotnet-sonarscanner begin /o:$env:SONAR_ORGANIZATION /k:$env:SONAR_PROJECT_KEY /d:sonar.host.url=$env:SONAR_HOST_URL
           
 
@@ -206,8 +207,7 @@ jobs:
         if: runner.os == 'Windows'
         continue-on-error: true
         run: |
-          $DOTNET_ROOT = "..\dotnet"
-          ../dotnet/dotnet.exe tool install -g roslynator.dotnet.cli
+          ../dotnet/dotnet.exe tool install --tool-path ../dotnet/tools roslynator.dotnet.cli
           $slnFile = Get-ChildItem -Recurse -Filter *.sln | Select-Object -First 1
           if ($slnFile -eq $null) {
               Write-Host "No .sln file found in the directory and its subdirectories."
@@ -223,8 +223,7 @@ jobs:
         if: runner.os != 'Windows'
         continue-on-error: true
         run: |
-          export DOTNET_ROOT="../dotnet"
-          ../dotnet/dotnet tool install -g roslynator.dotnet.cli
+          ../dotnet/dotnet tool install --tool-path ../dotnet/tools roslynator.dotnet.cli
           slnFile=$(find . -type f -name "*.sln" | head -n 1)
   
           if [ -z "$slnFile" ]; then
@@ -250,6 +249,7 @@ jobs:
 
 
   sonarend:
+    name: Sonar End
     runs-on: self-hosted
     needs: tests
     env:
@@ -258,11 +258,11 @@ jobs:
     steps:
       - name: Sonar End
         run: |
-          $env:DOTNET_ROOT/tools/dotnet-sonarscanner end /d:sonar.login=$env:SONAR_TOKEN
+          ../dotnet/tools/dotnet-sonarscanner end /d:sonar.login=$env:SONAR_TOKEN
 
   commit:
     runs-on: self-hosted
-    needs: [tests, analyze-roslyn]
+    needs: [tests, sonarend]
     steps:
       - name: remove CiOutput if it exists Windows
         if: runner.os == 'Windows'
